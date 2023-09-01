@@ -5,7 +5,12 @@
 html,
 body,
 :root {
-	width: 100%;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+.cl-internal-b3fm6y {
+	display: none;
 }
 
 @layer base {
