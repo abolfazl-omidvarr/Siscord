@@ -5,7 +5,6 @@ import Image from 'next/image'
 
 import '@uploadthing/react/styles.css'
 import {UploadDropzone} from "@/lib/uploadthing";
-import {relativizeURL} from "next/dist/shared/lib/router/utils/relativize-url";
 
 
 interface FileUploadProp {
@@ -17,7 +16,7 @@ interface FileUploadProp {
 export const FileUpload = ({onChange, value, endpoint}: FileUploadProp) => {
 
     const fileType = value?.split('.').pop()
-    if (value && value !== 'pdf') {
+    if (value && fileType !== 'pdf') {
         return (
             <div className='relative h-24 w-24 drop-shadow-md'>
                 <Image
@@ -33,8 +32,6 @@ export const FileUpload = ({onChange, value, endpoint}: FileUploadProp) => {
         )
     }
     const onClientUploadCompleteHandler = (res: any) => {
-        console.log('upload Complete', res?.[0].url)
-        console.log('upload Complete', res?.[0].fileUrl)
         onChange(res?.[0].url)
     }
     const onUploadErrorHandler = (err: Error) => {
