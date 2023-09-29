@@ -5,6 +5,7 @@ import Image from 'next/image'
 
 import '@uploadthing/react/styles.css'
 import {UploadDropzone} from "@/lib/uploadthing";
+import {createContext, FC, ReactNode, useContext, useEffect} from "react";
 
 
 interface FileUploadProp {
@@ -18,6 +19,7 @@ export const FileUpload = ({onChange, value, endpoint}: FileUploadProp) => {
     const fileType = value?.split('.').pop()
     if (value && fileType !== 'pdf') {
         return (
+
             <div className='relative h-24 w-24 drop-shadow-md'>
                 <Image
                     fill
