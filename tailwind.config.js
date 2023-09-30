@@ -2,10 +2,10 @@
 module.exports = {
 	darkMode: ["class"],
 	content: [
-		"./pages/**/*.{ts,tsx}",
-		"./components/**/*.{ts,tsx}",
-		"./app/**/*.{ts,tsx}",
-		"./src/**/*.{ts,tsx}",
+		'./pages/**/*.{ts,tsx}',
+		'./components/**/*.{ts,tsx}',
+		'./app/**/*.{ts,tsx}',
+		'./src/**/*.{ts,tsx}',
 	],
 	theme: {
 		container: {
@@ -70,23 +70,7 @@ module.exports = {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
 			},
-			// backgroundColor: {
-			// 	primary: "var(--bg-primary)",
-			// 	secondary: "var(--bg-secondary)",
-			// 	tertiary: "var(--bg-tertiary)",
-			// 	online: "var(--bg-online)",
-			// 	btn: "var(--bg-btn)",
-			// 	"btn-danger": "var(--bg-btn-danger)",
-			// 	"btn-danger-hover": "var(--bg-btn-danger-hover)",
-			// 	hover: "var(--bg-hover)",
-			// 	"btn-hover": "var(--bg-btn-hover)",
-			// 	"btn-ghost": "var(--bg-btn-ghost)",
-			// 	"msg-current": "var(--bg-msg-current)",
-			// 	"msg-other": "var(--bg-msg-other)",
-			// 	toast: "var(--toastify-toast-background)",
-			// 	"skeleton-primary": "var(--bg-skeleton-primary)",
-			// },
 		},
 	},
 	plugins: [require("tailwindcss-animate")],
-};
+}
