@@ -5,12 +5,7 @@
 html,
 body,
 :root {
-	width: 100vw;
-	height: 100vh;
-	overflow: hidden;
-}
-.cl-internal-b3fm6y {
-	display: none;
+	height: 100%;
 }
 
 @layer base {
@@ -44,47 +39,6 @@ body,
 		--ring: 20 14.3% 4.1%;
 
 		--radius: 0.5rem;
-
-		/* colors */
-		/* slate-900  */
-		--text-primary: #0f172a;
-		/* slate-800 */
-		--text-secondary: #1e293b;
-		/* white */
-		--text-white: #ffffff;
-
-		/* white */
-		--bg-primary: #fff;
-		/* gray-100 */
-		--bg-secondary: #f3f4f6;
-		/* gray-200 */
-		--bg-secondary: #e5e7eb;
-		/* gray-300 */
-		--bg-tertiary: #d1d5db;
-		/* green-500 */
-		--bg-online: #22c55e;
-		/* gray-200 */
-		--bg-hover: #e5e7eb;
-
-		/* slate-700 */
-		--bg-btn: #334155;
-		/* red-600 */
-		--bg-btn-danger: #dc2626;
-		/* red-500 */
-		--bg-btn-danger-hover: #ef4444;
-		/* slate-800 */
-		--bg-btn-hover: #1e293b;
-		/* slate-300 */
-		--bg-btn-ghost: #cbd5e1;
-
-		/* lime-100 */
-		--bg-msg-current: #ecfccb;
-		/* gray-100 */
-		--bg-msg-other: #f3f4f6;
-		/* black */
-		--bg-skeleton-primary: #020617;
-		/* slate-200 */
-		--bg-skeleton-primary: #e2e8f0;
 	}
 
 	.dark {
@@ -115,36 +69,6 @@ body,
 		--border: 12 6.5% 15.1%;
 		--input: 12 6.5% 15.1%;
 		--ring: 24 5.7% 82.9%;
-
-		/* colors */
-		/* slate-200 */
-		--text-primary: #e2e8f0;
-		/* slate-300 */
-		--text-secondary: #cbd5e1;
-		/* slate-700 */
-		--bg-primary: #334155;
-		/* gray-800 */
-		--bg-secondary: #1f2937;
-		/* slate-600 */
-		--bg-hover: #475569;
-
-		/* slate-200 */
-		--bg-btn: #e2e8f0;
-		/* red-500 */
-		--bg-btn-danger: #ef4444;
-		/* red- */
-		--bg-btn-danger-hover: #dc2626;
-		/* slate-100 */
-		--bg-btn-hover: #f1f5f9;
-		/* slate-700 */
-		--bg-btn-ghost: #334155;
-
-		/* purple-900 */
-		--bg-msg-current: #581c87;
-		/* slate-700 */
-		--bg-msg-other: #334155;
-		/* slate-200 */
-		--bg-skeleton-primary: #e2e8f0;
 	}
 }
 
