@@ -8,11 +8,9 @@ export const currentProfile = async () => {
 		return null;
 	}
 
-	const profile = await prisma.profile.findUnique({
+	return await prisma.profile.findUnique({
 		where: {
 			userId
 		}
 	});
-
-	return profile;
 };
