@@ -1,11 +1,12 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
-
 import { ClerkProvider } from "@clerk/nextjs";
-import { ThemeProvider } from "@/components/providers/theme-provider";
+
+import { ThemeProvider } from "@/providers/theme-provider";
+import { ReduxProvider } from "@/providers/redux-provider";
+import { ModalProvider } from "@/providers/modal-provider";
 import { cn } from "@/lib/utils";
-import ReduxProvider from "@/redux/provider";
 
 const font = Open_Sans({ subsets: ["latin"] });
 
@@ -33,6 +34,7 @@ export default function RootLayout({
 					enableSystem={false}
 					storageKey="theme"
 				>
+					<ModalProvider/>
 					{children}
 				</ThemeProvider>
 				</body>
