@@ -1,18 +1,18 @@
-import {auth} from "@clerk/nextjs";
-import {prisma} from "@/lib/db";
+import { auth } from "@clerk/nextjs";
+import { prisma } from "@/lib/db";
 
 export const currentProfile = async () => {
-    const {userId} = auth()
+	const { userId } = auth();
 
-    if (!userId) {
-        return null
-    }
+	if (!userId) {
+		return null;
+	}
 
-    const profile = await prisma.profile.findUnique({
-        where: {
-            userId
-        },
-    })
+	const profile = await prisma.profile.findUnique({
+		where: {
+			userId
+		}
+	});
 
-    return profile
-}
+	return profile;
+};
