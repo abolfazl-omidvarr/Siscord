@@ -4,7 +4,7 @@ import NavigationItem from "@/components/navigation/navigation-item";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ModeToggle } from "@/components/mode-toggle";
 
-import { prisma } from "@/lib/db";
+import { prisma } from "@/lib/prisma";
 import { currentProfile } from "@/lib/current-profile";
 
 import { redirect } from "next/navigation";

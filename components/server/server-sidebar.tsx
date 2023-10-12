@@ -1,5 +1,5 @@
 import ServerHeader from "@/components/server/server-header";
-import { prisma } from "@/lib/db";
+import { prisma } from "@/lib/prisma";
 
 import { currentProfile } from "@/lib/current-profile";
 import { redirectToSignIn } from "@clerk/nextjs";

@@ -2,7 +2,7 @@ import {NextResponse} from "next/server";
 import {MemberRole} from '@prisma/client'
 
 import {currentProfile} from "@/lib/current-profile";
-import {prisma} from "@/lib/db";
+import {prisma} from "@/lib/prisma";
 import {v4 as uuid} from 'uuid'
 
 export async function POST(req: Request) {

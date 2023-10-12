@@ -1,6 +1,6 @@
 import ServerSidebar from "@/components/server/server-sidebar";
 import { currentProfile } from "@/lib/current-profile";
-import { prisma } from "@/lib/db";
+import { prisma } from "@/lib/prisma";
 
 import { redirectToSignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
