@@ -1,13 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 // import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface CounterState {
 	isCreateServerOpen: boolean;
+	isEditServerOpen: boolean;
+	editServerInitialData: { name: string, imageUrl: string, id: string };
 }
 
 const initialState: CounterState = {
-	isCreateServerOpen: false
+	isCreateServerOpen: false,
+	isEditServerOpen: false,
+	editServerInitialData: { imageUrl: "", name: "", id: "" }
 };
 
 export const modalSlice = createSlice({
@@ -19,6 +23,15 @@ export const modalSlice = createSlice({
 		},
 		closeCreateServer: (state) => {
 			state.isCreateServerOpen = false;
+		},
+		openEditServer: (state) => {
+			state.isEditServerOpen = true;
+		},
+		closeEditServer: (state) => {
+			state.isEditServerOpen = false;
+		},
+		setEditServerInitialData: (state, action: PayloadAction<{ name: string, imageUrl: string, id: string }>) => {
+			state.editServerInitialData = action.payload;
 		}
 		// incrementByAmount: (state, action: PayloadAction<number>) => {
 		// 	state.value += action.payload;
@@ -26,7 +39,12 @@ export const modalSlice = createSlice({
 	}
 });
 
-// Action creators are generated for each case reducer function
-export const { openCreateServer, closeCreateServer } = modalSlice.actions;
+export const {
+	openCreateServer,
+	closeCreateServer,
+	openEditServer,
+	closeEditServer,
+	setEditServerInitialData
+} = modalSlice.actions;
 
 export default modalSlice.reducer;
