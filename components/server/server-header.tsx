@@ -8,7 +8,7 @@ import {
 import { ServerWithMemberAndProfile } from "@/lib/types";
 import { MemberRole } from "@prisma/client";
 import { ChevronDown, LogOut, PlusCircle, Settings, Trash, UserPlus, Users } from "lucide-react";
-import { openEditServer, setEditServerInitialData } from "@/redux/slices/modalSlice";
+import { openEditServer, openInvite, setEditServerInitialData, setInviteModalData } from "@/redux/slices/modalSlice";
 import { useDispatch } from "react-redux";
 
 interface ServerHeaderProps {
@@ -20,6 +20,11 @@ const ServerHeader = ({ server, role }: ServerHeaderProps) => {
 	const dispatch = useDispatch();
 	const isAdmin = role === MemberRole.ADMIN;
 	const isModerator = isAdmin || role === MemberRole.MODERATOR;
+
+	const onInviteClickHandler = () => {
+		dispatch(openInvite());
+		dispatch(setInviteModalData({ inviteCode: server.inviteCode, serverId: server.id }));
+	};
 
 	const onServerSettingClickHandler = () => {
 		dispatch(openEditServer());
@@ -44,6 +49,7 @@ const ServerHeader = ({ server, role }: ServerHeaderProps) => {
 				>
 					{isModerator && (
 						<DropdownMenuItem
+							onClick={onInviteClickHandler}
 							className="text-indigo-600 dark:text-indigo-400 px-3 py-2 text-sm cursor-pointer"
 						>
 							Invite People
