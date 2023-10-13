@@ -16,24 +16,27 @@ import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { closeCreateServer } from "@/redux/slices/modalSlice";
+import { useEffect, useState } from "react";
+import { uploadToCloadinary } from "@/lib/utils";
+import toast from "react-hot-toast";
 
 const formSchema = z.object({
 	name: z
 		.string()
 		.min(1, { message: "Server name is required" })
-		.max(30, { message: "Server name must be less than 30 characters" }),
-	imageUrl: z.string().min(1, { message: "Server image is required" })
+		.max(30, { message: "Server name must be less than 30 characters" })
+	// imageUrl: z.string().min(1, { message: "Server image is required" })
 });
 
 export const CreateServerModal = () => {
 	const router = useRouter();
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 	const open = useSelector((state: RootState) => state.modal.isCreateServerOpen);
 	const form = useForm({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			name: "",
-			imageUrl: ""
+			file: undefined
 		}
 	});
 
@@ -41,19 +44,25 @@ export const CreateServerModal = () => {
 
 	const onSubmit = async (data: z.infer<typeof formSchema>) => {
 		try {
-			await axios.post("/api/servers", data);
+			const imageUrl = await uploadToCloadinary(form.getValues("file"),'serverImage');
+			await axios.post("/api/servers", { name: data.name, imageUrl });
 			form.reset();
 			router.refresh();
-			dispatch(closeCreateServer())
-		} catch (err) {
-			console.log(err);
+			dispatch(closeCreateServer());
+		} catch (err:any) {
+			console.error(err.message);
+			toast.error(err.message);
 		}
 	};
 
-	const handleClose  = () =>{
-		form.reset()
-		dispatch(closeCreateServer())
-	}
+	const handleClose = () => {
+		form.reset();
+		dispatch(closeCreateServer());
+	};
+
+	useEffect(() => {
+		console.log(form.getValues('file'));
+	});
 
 	return (
 		<Dialog open={open} onOpenChange={handleClose}>
@@ -72,16 +81,14 @@ export const CreateServerModal = () => {
 						<div className="space-y-8 px-6">
 							<div className="flex items-center justify-center text-center">
 								<FormField
-									name="imageUrl"
+									name="file"
 									control={form.control}
 									render={({ field }) => (
 										<FormItem>
-											<FormControl>
-												<FileUpload
-													endpoint="serverImage"
-													value={field.value}
-													onChange={field.onChange} />
-											</FormControl>
+											<FileUpload
+												value={field.value}
+												onChange={field.onChange}
+											/>
 										</FormItem>
 									)
 									} />

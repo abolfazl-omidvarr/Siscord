@@ -15,16 +15,17 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import { closeEditServer } from "@/redux/slices/modalSlice";
+import { closeCreateServer, closeEditServer } from "@/redux/slices/modalSlice";
 import { useEffect } from "react";
 import { sleep } from "@/lib/sleep";
+import { uploadToCloadinary } from "@/lib/utils";
+import toast from "react-hot-toast";
 
 const formSchema = z.object({
 	name: z
 		.string()
 		.min(1, { message: "Server name is required" })
-		.max(30, { message: "Server name must be less than 30 characters" }),
-	imageUrl: z.string().min(1, { message: "Server image is required" })
+		.max(30, { message: "Server name must be less than 30 characters" })
 });
 
 export const EditServerModal = () => {
@@ -36,7 +37,8 @@ export const EditServerModal = () => {
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			name: "",
-			imageUrl: ""
+			imageUrl: "",
+			file: undefined
 		}
 	});
 
@@ -49,13 +51,17 @@ export const EditServerModal = () => {
 	const isLoading = form.formState.isSubmitting;
 
 	const onSubmit = async (data: z.infer<typeof formSchema>) => {
+		const { name } = data;
 		try {
-			await axios.patch(`/api/servers/${server.id}`, data);
+			const imageUrl = await uploadToCloadinary(form.getValues("file"), "serverImage");
+			await axios.patch(`/api/servers/${server.id}`, { name, imageUrl });
+			dispatch(closeEditServer());
+			await sleep(100);
 			form.reset();
 			router.refresh();
-			dispatch(closeEditServer());
-		} catch (err) {
-			console.log(err);
+		} catch (err: any) {
+			console.error(err.message);
+			toast.error(err.message);
 		}
 	};
 
@@ -82,16 +88,14 @@ export const EditServerModal = () => {
 						<div className="space-y-8 px-6">
 							<div className="flex items-center justify-center text-center">
 								<FormField
-									name="imageUrl"
+									name="file"
 									control={form.control}
 									render={({ field }) => (
 										<FormItem>
-											<FormControl>
-												<FileUpload
-													endpoint="serverImage"
-													value={field.value}
-													onChange={field.onChange} />
-											</FormControl>
+											<FileUpload
+												editServer={{ imageUrl: server.imageUrl }}
+												value={field.value}
+												onChange={field.onChange} />
 										</FormItem>
 									)
 									} />
