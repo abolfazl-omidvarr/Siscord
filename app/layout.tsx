@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from 'react-hot-toast';
 
 import { ThemeProvider } from "@/providers/theme-provider";
 import { ReduxProvider } from "@/providers/redux-provider";
@@ -34,8 +35,9 @@ export default function RootLayout({
 					enableSystem={false}
 					storageKey="theme"
 				>
-					<ModalProvider/>
 					{children}
+					<ModalProvider/>
+					<Toaster />
 				</ThemeProvider>
 				</body>
 				</html>
