@@ -28,7 +28,7 @@ export const InviteModal = () => {
 	const handleClose = () => {
 		dispatch(closeInvite());
 	};
-	const inviteUrl = `${origin}/invite/server/${server?.inviteCode}`;
+	const inviteUrl = `${origin}/invite/${server?.inviteCode}`;
 
 	const onCopy = () => {
 		clearTimeout(copingRef.current);
