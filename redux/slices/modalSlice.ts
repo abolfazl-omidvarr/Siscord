@@ -1,21 +1,31 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Server } from "@prisma/client";
+import { Member, Profile, Server } from "@prisma/client";
 
 // import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface CounterState {
 	isCreateServerOpen: boolean;
+	//
 	isInviteOpen: boolean;
+	inviteData: {
+		inviteCode: string,
+		serverId: string
+	},
+	//
 	isEditServerOpen: boolean;
 	editServerInitialData: {
 		name: string,
 		imageUrl: string,
 		id: string
 	};
-	inviteData: {
-		inviteCode: string,
-		serverId: string
-	},
+	//
+	isManageMemberOpen: boolean
+	manageMemberData: {
+		name: string,
+		imageUrl: string,
+		id: string
+		serverMember: Member & { profile: Profile }[] | []
+	}
 }
 
 const initialState: CounterState = {
@@ -25,7 +35,10 @@ const initialState: CounterState = {
 	editServerInitialData: { imageUrl: "", name: "", id: "" },
 	//
 	isInviteOpen: false,
-	inviteData: { inviteCode: "", serverId: "" }
+	inviteData: { inviteCode: "", serverId: "" },
+	//
+	isManageMemberOpen: false,
+	manageMemberData: { imageUrl: "", name: "", id: "", serverMember: [] }
 };
 
 export const modalSlice = createSlice({
@@ -62,6 +75,22 @@ export const modalSlice = createSlice({
 			id: string
 		}>) => {
 			state.editServerInitialData = action.payload;
+		},
+		//
+		openMangeMember: (state) => {
+			state.isManageMemberOpen = true;
+		},
+		closeMangeMember: (state) => {
+			state.isManageMemberOpen = false;
+		},
+		setManageMemberData: (state, action: PayloadAction<{
+			name: string,
+			imageUrl: string,
+			id: string
+			serverMember: Member & { profile: Profile } | []
+		}>) => {
+			// @ts-ignore
+			state.manageMemberData = action.payload;
 		}
 	}
 });
@@ -74,7 +103,10 @@ export const {
 	setInviteModalData,
 	openEditServer,
 	closeEditServer,
-	setEditServerInitialData
+	setEditServerInitialData,
+	openMangeMember,
+	closeMangeMember,
+	setManageMemberData
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

@@ -8,7 +8,13 @@ import {
 import { ServerWithMemberAndProfile } from "@/lib/types";
 import { MemberRole } from "@prisma/client";
 import { ChevronDown, LogOut, PlusCircle, Settings, Trash, UserPlus, Users } from "lucide-react";
-import { openEditServer, openInvite, setEditServerInitialData, setInviteModalData } from "@/redux/slices/modalSlice";
+import {
+	openEditServer,
+	openInvite,
+	openMangeMember,
+	setEditServerInitialData,
+	setInviteModalData, setManageMemberData
+} from "@/redux/slices/modalSlice";
 import { useDispatch } from "react-redux";
 
 interface ServerHeaderProps {
@@ -30,6 +36,16 @@ const ServerHeader = ({ server, role }: ServerHeaderProps) => {
 		dispatch(openEditServer());
 		dispatch(setEditServerInitialData({ name: server.name, imageUrl: server.imageUrl, id: server.id }));
 	};
+	const onManageMemberClickHandler = () => {
+		dispatch(openMangeMember());
+		dispatch(setManageMemberData({
+			name: server.name,
+			imageUrl: server.imageUrl,
+			id: server.id,
+			serverMember: server.Member
+		}));
+	};
+
 
 	return (
 		<div className="flex flex-col text-primary w-full h-full dark:bg-[#2B2D31] bg-[#F2F3F5]">
@@ -65,6 +81,7 @@ const ServerHeader = ({ server, role }: ServerHeaderProps) => {
 						</DropdownMenuItem>)}
 					{isAdmin && (
 						<DropdownMenuItem
+							onClick={onManageMemberClickHandler}
 							className="px-3 py-2 text-sm cursor-pointer"
 						>
 							Manage members
