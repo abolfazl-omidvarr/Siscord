@@ -1,30 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="freedb_SisCord@sql.freedb.tech">
   <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.49">
-    <root id="1">
-      <DefaultCasing>exact</DefaultCasing>
-      <DefaultEngine>InnoDB</DefaultEngine>
-      <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
-      <Grants>freedb_SisCord|schema||freedb_abolfazl||ALTER|G
-freedb_SisCord|schema||freedb_abolfazl||ALTER ROUTINE|G
-freedb_SisCord|schema||freedb_abolfazl||CREATE|G
-freedb_SisCord|schema||freedb_abolfazl||CREATE ROUTINE|G
-freedb_SisCord|schema||freedb_abolfazl||CREATE TEMPORARY TABLES|G
-freedb_SisCord|schema||freedb_abolfazl||CREATE VIEW|G
-freedb_SisCord|schema||freedb_abolfazl||DELETE|G
-freedb_SisCord|schema||freedb_abolfazl||DROP|G
-freedb_SisCord|schema||freedb_abolfazl||EVENT|G
-freedb_SisCord|schema||freedb_abolfazl||EXECUTE|G
-freedb_SisCord|schema||freedb_abolfazl||INDEX|G
-freedb_SisCord|schema||freedb_abolfazl||INSERT|G
-freedb_SisCord|schema||freedb_abolfazl||LOCK TABLES|G
-freedb_SisCord|schema||freedb_abolfazl||REFERENCES|G
-freedb_SisCord|schema||freedb_abolfazl||SELECT|G
-freedb_SisCord|schema||freedb_abolfazl||SHOW VIEW|G
-freedb_SisCord|schema||freedb_abolfazl||TRIGGER|G
-freedb_SisCord|schema||freedb_abolfazl||UPDATE|G</Grants>
-      <ServerVersion>8.0.34</ServerVersion>
-    </root>
+    <root id="1"/>
     <collation id="2" parent="1" name="armscii8_general_ci">
       <Charset>armscii8</Charset>
       <DefaultForCharset>1</DefaultForCharset>
