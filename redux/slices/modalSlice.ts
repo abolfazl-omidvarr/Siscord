@@ -1,7 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Member, Profile, Server } from "@prisma/client";
+import { MemberRole, Profile } from "@prisma/client";
 
-export type serializedServerMemberDataOnlyType = Omit<Profile, "createdAt" | "updatedAt">
+type serializedServerMemberDataOnlyType = Omit<Profile, "createdAt" | "updatedAt">
+type serverMemberType = {
+	profile: serializedServerMemberDataOnlyType, id: string, role: MemberRole, profileId: string,
+}
 
 export interface CounterState {
 	isCreateServerOpen: boolean;
@@ -23,8 +26,9 @@ export interface CounterState {
 	manageMemberData: {
 		name: string,
 		imageUrl: string,
-		id: string
-		serverMember: { profile: serializedServerMemberDataOnlyType, id: string }[]
+		id: string,
+		profileId: string,
+		serverMember: serverMemberType[]
 	}
 }
 
@@ -38,7 +42,13 @@ const initialState: CounterState = {
 	inviteData: { inviteCode: "", serverId: "" },
 	//
 	isManageMemberOpen: false,
-	manageMemberData: { imageUrl: "", name: "", id: "", serverMember: [] }
+	manageMemberData: {
+		imageUrl: "",
+		name: "",
+		id: "",
+		profileId: "",
+		serverMember: []
+	}
 };
 
 export const modalSlice = createSlice({
@@ -87,7 +97,8 @@ export const modalSlice = createSlice({
 			name: string,
 			imageUrl: string,
 			id: string
-			serverMember: { profile: serializedServerMemberDataOnlyType, id: string }[]
+			profileId: string,
+			serverMember: serverMemberType[]
 		}>) => {
 			state.manageMemberData = action.payload;
 		}

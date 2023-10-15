@@ -42,8 +42,11 @@ const ServerHeader = ({ server, role }: ServerHeaderProps) => {
 			name: server.name,
 			imageUrl: server.imageUrl,
 			id: server.id,
+			profileId: server.profileId,
 			serverMember: server.Member.map(member => ({
 					id: member.id,
+					role: member.role,
+					profileId: member.profileId,
 					profile: {
 						id: member.profile.id,
 						userId: member.profile.userId,

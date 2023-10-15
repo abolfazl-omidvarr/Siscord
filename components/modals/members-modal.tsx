@@ -7,10 +7,19 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { closeMangeMember } from "@/redux/slices/modalSlice";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import UserAvatar from "@/components/user-avatar";
+import { ShieldAlert, ShieldCheck } from "lucide-react";
+
+export const roleIconMap = {
+	"GUEST": null,
+	"MODERATOR": <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500" />,
+	"ADMIN": <ShieldAlert className="h-4 w-4 text-rose-500" />
+};
 
 
 export const MemberModal = () => {
+	const [loadingId, setLoadingId] = useState("");
 	const [loading, setLoading] = useState(false);
+
 	const dispatch = useDispatch();
 
 	const { isManageMemberOpen: open, manageMemberData: data } = useSelector((state: RootState) => state.modal);
@@ -19,6 +28,7 @@ export const MemberModal = () => {
 		dispatch(closeMangeMember());
 	};
 
+	console.log(data.serverMember);
 
 	return (
 		<Dialog open={open} onOpenChange={handleClose}>
@@ -38,7 +48,18 @@ export const MemberModal = () => {
 							<div className="flex flex-col gap-y-1">
 								<div className="text-xs font-semibold flex items-center">
 									{member.profile.name}
+									{roleIconMap[member.role]}
 								</div>
+								<div>
+									<p className="text-xs text-zinc-500">
+										{member.profile.email}
+									</p>
+								</div>
+								{data.profileId !== member.profileId && loadingId !== member.id && (
+									<div>
+										Actions!
+									</div>
+								)}
 							</div>
 						</div>
 					)}
